@@ -3,48 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alen <alen@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 17:03:48 by apatvaka          #+#    #+#             */
-/*   Updated: 2025/02/03 17:52:32 by alen             ###   ########.fr       */
+/*   Updated: 2025/02/03 18:58:44 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static	void	rec(int n, int *sum)
+static	int	rec(int n)
 {
 	char	num;
+	int		sum;
 
+	sum = 0;
 	num = (n % 10) + '0';
 	if (n / 10 != 0)
 	{
 		n /= 10;
-		*sum += 1;
-		rec(n, sum);
+		sum += rec(n);
 	}
 	ft_putchar(num);
+	++sum;
+	return (sum);
 }
 
-void	ft_putnbr(int n, int *sum)
+int	ft_putnbr(int n, int sum)
 {
 	if (n == -2147483648)
 	{
 		write(1, "-2147483648", 11);
-		*sum += 11;
-		return ;
+		sum += 11;
+		return (sum);
 	}
 	if (n == 0)
 	{
 		ft_putchar('0');
-		*sum += 1;
-		return ;
+		sum += 1;
+		return (sum);
 	}
 	if (n < 0)
 	{
 		ft_putchar('-');
-		*sum += 1;
+		sum += 1;
 		n *= -1;
 	}
-	rec(n, sum);
+	return (sum + rec(n));
 }

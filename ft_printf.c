@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alen <alen@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 19:39:10 by alen              #+#    #+#             */
-/*   Updated: 2025/02/03 17:52:32 by alen             ###   ########.fr       */
+/*   Updated: 2025/02/03 19:05:32 by apatvaka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static	int	orientate_params(char param, va_list args, int count)
 	if (param == 's')
 		count += ft_putstr(va_arg(args, char *));
 	if (param == 'd' || param == 'i')
-		ft_putnbr(va_arg(args, int), &count);
+		count += ft_putnbr(va_arg(args, int), 0);
 	if (param == 'p')
 	{
 		count += ft_putstr("0x");
@@ -39,13 +39,13 @@ static	int	orientate_params(char param, va_list args, int count)
 	}
 	if (param == 'x')
 		count += base_number("0123456789abcdef", \
-		(unsigned long)va_arg(args, void *));
+		(unsigned int)va_arg(args, void *));
 	if (param == 'X')
 		count += base_number("0123456789ABCDEF", \
-		(unsigned long)va_arg(args, void *));
+		(unsigned int)va_arg(args, void *));
 	if (param == 'u')
 		count += base_number("0123456789", \
-		(unsigned long)va_arg(args, void *));
+		(unsigned int)va_arg(args, void *));
 	if (param == '%')
 		count += ft_putchar('%');
 	return (count);
@@ -64,7 +64,7 @@ int	ft_printf(const char *format, ...)
 		{
 			if (check_format(*(format + 1)))
 			{
-				ret += orientate_params(*(format + 1), args, ret);
+				ret += orientate_params(*(format + 1), args, 0);
 			}
 			++format;
 		}

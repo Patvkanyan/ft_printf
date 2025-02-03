@@ -17,7 +17,7 @@
 # include <stdarg.h>
 
 int		ft_printf(const char *format, ...);
-void	ft_putnbr(int n, int *sum);
+int		ft_putnbr(int n, int sum);
 int		ft_putchar(char c);
 int		ft_putstr(char *s);
 int		base_number(char *base, unsigned long num);

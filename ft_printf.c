@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apatvaka <apatvaka@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alen <alen@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 19:39:10 by alen              #+#    #+#             */
-/*   Updated: 2025/02/03 19:05:32 by apatvaka         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:35:47 by alen             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static	int	orientate_params(char param, va_list args, int count)
 	}
 	if (param == 'x')
 		count += base_number("0123456789abcdef", \
-		(unsigned int)va_arg(args, void *));
+		(unsigned int)va_arg(args, unsigned int));
 	if (param == 'X')
 		count += base_number("0123456789ABCDEF", \
-		(unsigned int)va_arg(args, void *));
+		(unsigned int)va_arg(args, unsigned int));
 	if (param == 'u')
 		count += base_number("0123456789", \
-		(unsigned int)va_arg(args, void *));
+		(unsigned int)va_arg(args, unsigned int));
 	if (param == '%')
 		count += ft_putchar('%');
 	return (count);
